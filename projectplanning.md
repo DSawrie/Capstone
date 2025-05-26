@@ -1,6 +1,6 @@
 I want to create an app that will help people organize their schedules better and keep track of their tasks. This app will allow you to schedule your weekly tasks and daily tasks in an efficient manner. That will simplify your day and help you accomplish what you need to do without getting disorganized. By allowing you to organize schedule and daily tasks in one site, you will be able to take care of everything you need to take care of in an efficient manner.
 
-The audience for my app will be employeess, freelancers, students and anyone who could an extra hand getting organized and getting things done.
+The audience for my app will be employees, freelancers, students and anyone who could an extra hand getting organized and getting things done.
 
 The project wil have 5 pages:
 

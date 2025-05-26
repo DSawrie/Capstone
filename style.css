@@ -1,0 +1,32 @@
+header {
+  background-color: rgb(100, 100, 255);
+  color: rgb(255, 185, 50);
+  font-size: xx-large;
+}
+
+h1 {
+padding: 50px;
+  color: rgb(100, 100, 255);
+  background-color:rgb(255, 185, 50);
+  text-align: center;
+}
+
+h2 {
+  color: rgb(100, 100, 255);
+}
+
+header, h2 {
+  padding: 50px;
+  text-align: center;
+}
+
+footer{
+  text-align: center;
+ color: rgb(255, 185, 50);
+
+}
+
+form {
+  text-align: center;
+  padding: 10px;
+}
