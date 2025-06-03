@@ -30,3 +30,48 @@ form {
   text-align: center;
   padding: 10px;
 }
+
+@media (min-width: 600px) {
+  .todo-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .todo-status {
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .todo-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .todo-item {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .todo-title {
+    font-size: 1.2rem;
+  }
+
+  .todo-status {
+    font-size: 1rem;
+  }
+}
