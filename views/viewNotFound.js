@@ -1,5 +1,5 @@
 import html from "html-literal";
-import oops404 from "url:../assets/img/oops-404.jpg";
+import oops404 from "url:../assets/oops-404.jpg";
 
 export default () => html`
  <div id="oops404">
