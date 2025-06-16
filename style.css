@@ -29,12 +29,11 @@ footer{
 form {
   text-align: center;
   padding: 10px;
+  gap: 10px;
 }
 
 @media (min-width: 600px) {
-  nav > .fa-bars {
-    display: none;
-  }
+
   .todo-item {
     flex-direction: row;
     justify-content: space-between;
@@ -79,16 +78,24 @@ form {
   }
 }
 
-@media (max-width: 599px) {
-.hidden--mobile {
-    display: none !important;
-  }
-}
-
 .archivo-black-regular {
   font-family: "Archivo Black", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #888;
+  margin-right: 6px;
+}
+
+input[type="text"] {
+  font-size: 1.2rem;
+  padding: 10px 12px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
 

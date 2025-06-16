@@ -7,13 +7,12 @@ import navItem from "./navitem.js";
 //      and constructs a new array from the results
 //  - .join joins the elements of the new array into one long string
 //  - data-navigo is a switch that allows Navigo to handle our page routing
-export default navItems => {
-  return html`
-    <nav>
-      <i class="fas fa-bars"></i>
-      <ul class="">
-        ${navItems.map(item => navItem(item)).join("")}
-      </ul>
-    </nav>
-  `
-}
+//export default navItems => {
+  //return html`
+   // <nav>
+  //    <ul class="">
+   //     ${navItems.map(item => navItem(item)).join("")}
+//      </ul>
+//    </nav>
+ // `
+//}
