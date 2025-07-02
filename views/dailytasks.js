@@ -26,7 +26,7 @@ export default () => html`
   </form>
     <input type="datetime-local" />
     <br />
-    <button>Create Task</button><br /><br /><br />
+    <button class="input">Create Task</button><br /><br /><br />
     <div style="align-items: center;">
       <input type="checkbox" />
       <p>Saved Task 1 Name</p>
