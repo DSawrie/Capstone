@@ -54,12 +54,31 @@ case "home":
     .then(response => {
       console.log("Weather response data:", response.data);
       // Create an object to be stored in the Home state from the response
+
       store.home.weather = {
         city: response.data.name,
         temp: response.data.main.temp,
         feelsLike: response.data.main.feels_like,
         description: response.data.weather[0].main
       };
+      console.log(store.home.weather)
+      done();
+    })
+    .catch((err) => {
+      console.log(err);
+      done();
+    });
+    case "dailytasks":
+      axios
+      // Get request to retrieve the current weather data using the API key and providing a city name
+      .get(
+        `${process.env.DAILY_TASK_API_URL}/task`
+        //store.dailytasks.tasks = response.data;
+      )
+      .then(response => {
+        console.log("Task response data:", response.data);
+        store.dailytasks.tasks = response.data;
+      // Create an object to be stored in the Home state from the response
       done();
   })
   .catch((err) => {
@@ -80,6 +99,30 @@ case "home":
   },
   after: (match) => {
     console.info("After hook executing");
+    const view = match?.data?.view ? camelCase(match.data.view) : "home";
+    switch(view){
+      case "dailytasks":
+        document.querySelector("form").addEventListener("submit", event => {
+          event.preventDefault();
+
+          const inputList = event.target.elements;
+          console.log("Input Element List", inputList);
+
+          const requestData = {
+          name: inputList.taskName.value,
+          isCompleted: false
+        }
+          axios
+          .post(`${process.env.DAILY_TASK_API_URL}/task`, requestData)
+          .then(response => {
+            //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+            store.dailytasks.tasks.push(response.data);
+            console.log("ResponseData", response.data)
+            router.navigate("/dailytasks");
+          })
+    })
+
+    }
     router.updatePageLinks();
 
     // add menu toggle to bars icon in nav bar

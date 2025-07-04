@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import pizzas from "./controllers/pizza.js";
+import task from "./controllers/task.js";
 
 // Load enviroment variables from .env file
 dotenv.config();
@@ -76,7 +76,7 @@ app.get("/weather/:city", (request, response) => {
   });
 });
 
-app.use("/pizzas", pizzas);
+app.use("/task", task);
 
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 3000
