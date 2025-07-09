@@ -20,21 +20,29 @@ export default (state) => html`
     <a href="/home" data-navigo>Return To Home Page</a>
   </h1>
   <div style="text-align: center;">
-    <p>Enter Task Name</p>
+    <p class="archivo-black-regular">Enter Task Name</p>
   <form>
       <label><input type="text" name="taskName"/></label>
       <input class="input" type="submit" value="Create Task"/>
   </form>
     <br />
   </div>
+  <table style="margin: 0 auto; border-collapse: collapse;">
+    <tbody>
     ${state.tasks
       .map(task => {
         return `<tr>
-          <td>${task.name}</td>
-          <td>${task.isCompleted}</td>
-        </tr>`;
-      })
-      .join("")}
-`;
+          <td>
+          <input type="checkbox" ${task.isCompleted ? "checked" : ""} data-id="${task.id}" />
+          ${task.name}
+          <button data-id="${task.id}" id="delete-btn">Delete</button>
+          </td>
+          </tr>`
+        })
+        .join("")}
+      </tbody>
+  </table>
+`
 
-
+// add back under <td>${task.name}</td> if necessary
+//<td>${task.isCompleted}</td>
