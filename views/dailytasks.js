@@ -33,9 +33,8 @@ export default (state) => html`
       .map(task => {
         return `<form data-id="${task.id}"><tr>
           <td>
-          <input type="checkbox" ${task.isCompleted ? "checked" : ""} data-id="${task.id}" />
           ${task.name}
-          <button id="${task._id}" class="delete-btn">Delete</button>
+          <button id="${task._id}" class="delete-btn">Complete</button>
           </td>
           </tr></form>`
         })

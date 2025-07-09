@@ -15,6 +15,46 @@ function render(state = store.home) {
   `;
 }
 
+async function taskEventHandlers() {
+      const form = document.querySelector("form");
+      if (form) {
+        form.addEventListener("submit", event => {
+          event.preventDefault();
+
+          const inputList = event.target.elements;
+          const requestData = {
+            name: inputList.taskName.value,
+            isCompleted: false
+          };
+
+          axios
+            .post(`${process.env.DAILY_TASK_API_URL}/task`, requestData)
+            .then(response => {
+              store.dailytasks.tasks.push(response.data);
+              router.navigate("/dailytasks");
+            })
+            .catch(err => console.error(err));
+        });
+      }
+
+      const deleteBtns = document.querySelectorAll(".delete-btn")
+      await deleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener("click", () => {
+          console.log("this happened")
+          //const taskId = event.target.dataset.id;
+          const taskId = deleteBtn.id
+          console.log("taskId", taskId)
+          axios
+            .delete(`${process.env.DAILY_TASK_API_URL}/task/${taskId}`)
+            .then((response) => {
+              store.dailytasks.tasks = store.dailytasks.tasks.filter(task => task._id != taskId);
+              console.log("navigate code line")
+              router.navigate("/dailytasks");
+            })
+            .catch(err => console.error(err));
+        });
+      });
+}
 
 router.hooks({
   before: async (done, match) => {
@@ -63,6 +103,9 @@ router.hooks({
   already: match => {
     const view = match?.data?.view ? camelCase(match.data.view) : "home";
     render(store[view]);
+    if (view === "dailytasks") {
+      taskEventHandlers()
+    }
   },
 
   after: async (match) => {
@@ -71,44 +114,7 @@ router.hooks({
     const view = match?.data?.view ? camelCase(match.data.view) : "home";
 
     if (view === "dailytasks") {
-      const form = document.querySelector("form");
-      if (form) {
-        form.addEventListener("submit", event => {
-          event.preventDefault();
-
-          const inputList = event.target.elements;
-          const requestData = {
-            name: inputList.taskName.value,
-            isCompleted: false
-          };
-
-          axios
-            .post(`${process.env.DAILY_TASK_API_URL}/task`, requestData)
-            .then(response => {
-              store.dailytasks.tasks.push(response.data);
-              router.navigate("/dailytasks");
-            })
-            .catch(err => console.error(err));
-        });
-      }
-
-      const deleteBtns = document.querySelectorAll(".delete-btn")
-      await deleteBtns.forEach(deleteBtn => {
-        deleteBtn.addEventListener("click", () => {
-          console.log("this happened")
-          //const taskId = event.target.dataset.id;
-          const taskId = deleteBtn.id
-          console.log("taskId", taskId)
-          axios
-            .delete(`${process.env.DAILY_TASK_API_URL}/task/${taskId}`)
-            .then((response) => {
-              //store.dailytasks.tasks = store.dailytasks.tasks.filter(task => task.id != taskId);
-              console.log("navigate code line")
-              router.navigate("/dailytasks");
-            })
-            .catch(err => console.error(err));
-        });
-      });
+      taskEventHandlers()
     }
 
     router.updatePageLinks();
