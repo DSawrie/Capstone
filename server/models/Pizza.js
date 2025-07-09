@@ -26,3 +26,5 @@ const pizzaSchema = new mongoose.Schema({
 const Pizza = mongoose.model("Pizza", pizzaSchema);
 
 export default Pizza;
+
+console.log("MongoDB Connected")
