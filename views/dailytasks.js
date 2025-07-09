@@ -31,13 +31,13 @@ export default (state) => html`
     <tbody>
     ${state.tasks
       .map(task => {
-        return `<tr>
+        return `<form data-id="${task.id}"><tr>
           <td>
           <input type="checkbox" ${task.isCompleted ? "checked" : ""} data-id="${task.id}" />
           ${task.name}
-          <button data-id="${task.id}" id="delete-btn">Delete</button>
+          <button id="${task._id}" class="delete-btn">Delete</button>
           </td>
-          </tr>`
+          </tr></form>`
         })
         .join("")}
       </tbody>

@@ -40,7 +40,7 @@ router.get("/", async (request, response) => {
 // Delete a pizza by ID
 router.delete("/:id", async (request, response) => {
   try {
-    const data = await Task.findByIdAndDelete(request.params.id, {});
+    const data = await Task.findByIdAndDelete(request.params.id);
 
     response.json(data);
   } catch (error) {

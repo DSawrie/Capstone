@@ -17,7 +17,7 @@ function render(state = store.home) {
 
 
 router.hooks({
-  before: (done, match) => {
+  before: async (done, match) => {
     console.info("Before hook executing");
 
     const view = match?.data?.view ? camelCase(match.data.view) : "home";
@@ -42,10 +42,11 @@ router.hooks({
         break;
 
       case "dailytasks":
-        axios
+        await axios
           .get(`${process.env.DAILY_TASK_API_URL}/task`)
           .then(response => {
             store.dailytasks.tasks = response.data;
+            console.log("dailytasks", store.dailytasks.tasks)
             done();
           })
           .catch(err => {
@@ -64,7 +65,7 @@ router.hooks({
     render(store[view]);
   },
 
-  after: match => {
+  after: async (match) => {
     console.info("After hook executing");
 
     const view = match?.data?.view ? camelCase(match.data.view) : "home";
@@ -91,13 +92,18 @@ router.hooks({
         });
       }
 
-      document.querySelectorAll("#delete-btn").forEach(button => {
-        button.addEventListener("click", event => {
-          const taskId = event.target.dataset.id;
+      const deleteBtns = document.querySelectorAll(".delete-btn")
+      await deleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener("click", () => {
+          console.log("this happened")
+          //const taskId = event.target.dataset.id;
+          const taskId = deleteBtn.id
+          console.log("taskId", taskId)
           axios
             .delete(`${process.env.DAILY_TASK_API_URL}/task/${taskId}`)
-            .then(() => {
-              store.dailytasks.tasks = store.dailytasks.tasks.filter(task => task.id != taskId);
+            .then((response) => {
+              //store.dailytasks.tasks = store.dailytasks.tasks.filter(task => task.id != taskId);
+              console.log("navigate code line")
               router.navigate("/dailytasks");
             })
             .catch(err => console.error(err));
