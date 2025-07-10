@@ -28,7 +28,8 @@ async function taskEventHandlers() {
           };
 
           axios
-            .post(`${process.env.DAILY_TASK_API_URL}/task`, requestData)
+            //.post(`${process.env.DAILY_TASK_API_URL}/task`, requestData)
+            .post("https://capstone-i4qs.onrender.com/task", requestData)
             .then(response => {
               store.dailytasks.tasks.push(response.data);
               router.navigate("/dailytasks");
@@ -45,7 +46,8 @@ async function taskEventHandlers() {
           const taskId = deleteBtn.id
           console.log("taskId", taskId)
           axios
-            .delete(`${process.env.DAILY_TASK_API_URL}/task/${taskId}`)
+            //.delete(`${process.env.DAILY_TASK_API_URL}/task/${taskId}`)
+            .delete(`https://capstone-i4qs.onrender.com/task/${taskId}`)
             .then((response) => {
               store.dailytasks.tasks = store.dailytasks.tasks.filter(task => task._id != taskId);
               console.log("navigate code line")
@@ -83,7 +85,8 @@ router.hooks({
 
       case "dailytasks":
         await axios
-          .get(`${process.env.DAILY_TASK_API_URL}/task`)
+          //.get(`${process.env.DAILY_TASK_API_URL}/task`)
+          .get("https://capstone-i4qs.onrender.com/task")
           .then(response => {
             store.dailytasks.tasks = response.data;
             console.log("dailytasks", store.dailytasks.tasks)
